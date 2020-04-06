@@ -1,0 +1,83 @@
+#myform {
+  margin: 15px auto;
+  width: 92%;
+}
+
+.area {
+  color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  margin: 16px 0;
+}
+
+label {
+  line-height: 30px;
+  display: table-header-group;
+  font-size: 0.95em;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  color: #535457;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  border: 1px solid rgba(14, 18, 22,0.4);
+  border-radius: 5px;
+  background: transparent;
+  color: #294550;
+  display: table-row-group;
+  transition: all 0.3s ease;
+  font-size: 1.05em;
+}
+
+input:focus {
+  outline: none !important;
+  border-color: rgb(15, 72, 95);
+}
+
+input:focus + label {
+  color: #2b5b69;
+}
+
+.row_address {
+  margin: 15px 0;
+  width: 100%;
+  padding: 0;
+  display: table;
+}
+
+.footer {
+  float: left;
+  width: fit-content;
+}
+
+.col2 {
+  display: table;
+  width: 47%;
+  float: left;
+}
+
+.col2:nth-child(2) {
+  float: right;
+  display: table;
+}
+@media screen and (max-width: 800px) {
+  #myform {
+  margin: 10px auto;
+  width: 80%;
+}
+  .col2 {
+  display: table;
+  width: 100%;
+  float: left;
+}  
+}
+
+@media screen and (max-width: 600px) {
+  #myform {
+  margin: 10px auto;
+  width: 100%;
+}
+ 
+}

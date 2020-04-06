@@ -1,0 +1,77 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'pizza/css/address.css' %}">
+<style>
+  #exampleModalLabel {
+    font-size: 25px; 
+    margin-left: 20px;
+    align-self: center;
+    vertical-align: baseline;
+  }
+  .modal-dialog {
+    border-width: 2px;
+  }
+</style>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-color: rgb(1, 5, 26);" >
+      <div class="modal-header" style="background-color: rgb(82, 133, 235);">
+        <h5 class="modal-title" id="exampleModalLabel" >Shipping Address</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     
+      <div class="modal-body">
+          
+          <form id="myform" method="POST" action= "{% url 'checkout' %}" >
+            {% csrf_token %}
+            <div class="area">
+              <div class="row_address">
+                <div class="col2">
+                  <input type="text" name="firstname" required>
+                  <label for="fistname">First Name</label>
+                </div>
+                <div class="col2">
+                  <input type="text" name="lastname" required>
+                  <label for="lastname">Last Name</label>
+                </div>
+              </div>
+              <div class="row_address">
+                <input type="text" name="address1" id="address1" required>
+                <label for="address1">Address Line 1</label>
+              </div>
+              <div class="row_address">
+                <input type="text" name="address2" id="address2">
+                <label for="address2">Address Line 2</label>
+              </div>
+              <div class="row_address ">
+                <div class="col2">
+                  <label for="city">City</label>
+                  <input type="text" name="city" required>
+                </div>                
+                <div class="col2">
+                  <div class="col2 ">
+                    <label for="zipcode">Zipcode</label>
+                    <input type="number" name="zip_code" required>
+                  </div>
+                  <div class="col2">
+                    <label for="country">Country</label>
+                    <select class="col2" style="width: fit-content; background: rgb(255, 255, 255);" name="country" required>
+                      <option value="IN">INDIA</option>
+                    </select>
+                  </div>
+                </div>
+              </div>          
+            </div>
+          </form>
+
+      </div>
+
+      <div class="modal-footer" style="height: 65px;">
+        <a href="{% url 'checkout' %}" ><button class="button" style="min-width: 200px;justify-self: center;float: left;" form="myform">Checkout</button></a>
+      </div>
+    </div>
+  </div>
+</div>

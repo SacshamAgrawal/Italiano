@@ -1,0 +1,6 @@
+root/
+Files/
+test_files/
+.env
+__pycache__/
+.vscode

@@ -1,0 +1,124 @@
+{% extends 'pizza/base.html' %}
+{% load static %}
+{% block title %}-Customer Sevice{% endblock %}
+{% block body %}
+    <script src= "{% static 'pizza/js/reconnecting-websocket.min.js' %}" charset="utf-8"></script>
+    <script src="/static/pizza/css/chat.css"></script>
+
+    <section class="home-slider owl-carousel img" style="background-image: url(/static/pizza/images/bg_1.jpg);">
+
+      <div class="slider-item" style="background-image: url(/static/pizza/images/bg_3.jpg);">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center">
+
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+            	<h1 class="mb-3 mt-5 bread">Contact Us</h1>
+	            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'homepage' %}">Home</a></span> <span>Contact</span></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section contact-section">
+      <div class="container mt-5">
+        <div class="row block-9">
+					<div class="col-md-4 contact-info ftco-animate">
+						<div class="row">
+							<div class="col-md-12 mb-4">
+	              <h2 class="h4">Contact Information</h2>
+	            </div>
+	            <div class="col-md-12 mb-3">
+	              <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+	            </div>
+	            <div class="col-md-12 mb-3">
+	              <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+	            </div>
+	            <div class="col-md-12 mb-3">
+	              <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+	            </div>
+	            <div class="col-md-12 mb-3">
+	              <p><span>Website:</span> <a href="#">yoursite.com</a></p>
+	            </div>
+						</div>
+					</div>
+          <div class="col-md-1"></div>
+          
+          
+          <div class="col-md-6 ftco-animate">
+            
+            <div style="padding: 20px;background-image: url(/static/pizza/images/chat_bg.jpg/); border-radius: 1%;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-comment"><h2 class="h3" style="color: rgb(0, 0, 0);"><strong>Contact Information</strong></h2></span>
+                    </div>
+                    <div id="chat-log" class="panel-body" style="color: rgba(26, 21, 21, 0.596);">
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row" style="margin-left: 10px;">
+                            <input id="chat-message-input" type="text" class="col-md-9" style="color: dimgray;" placeholder="Type your message here...">
+                            <button id="chat-message-submit" class="btn btn-primary" style="border-radius: 5%;width: fit-content;">Send</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+        
+        </div>
+      </div>
+    </section>    
+{% endblock %}
+{% block js %}
+  <script>
+    var room = "{{room_name_json}}";
+    var endpoint = 'ws://'+window.location.host+'/ws/'+room+'/';
+    var ChatSocket = new WebSocket(endpoint);
+    
+    ChatSocket.onmessage = function(e){
+        var data = JSON.parse(e.data)
+        var username = data['username']
+        if ( data['type'] == 'join' )
+            message = ('<p>'+ username + ' joined</p>')
+        else if( data['type'] == 'leave' )
+            message = ('<p>'+username + ' left</p>') 
+        else
+            message = ('<p>'+username + ": "+data['message'] + '</p>') 
+        $('#chat-log').append(message) 
+    }
+
+    ChatSocket.onopen = function(e){
+      console.log("openning connection");
+    };
+
+    ChatSocket.onerror = function(e){
+      console.log("erroring connection",e);
+    };
+
+    ChatSocket.onclose = function(e){
+        console.log("Chat session Closed Unexpectedly.")
+    };
+
+    $('#chat-message-input').focus();
+    $('#chat-message-input').on('keyup' , function(e){
+        if( e.keyCode === 13 ){
+            $("#chat-message-submit").click()
+        }
+    })
+    
+    $("#chat-message-submit").on('click' , function(e){
+        var input_message = $("input[id=chat-message-input]")
+        console.log("Sending.. ",input_message)
+        ChatSocket.send(JSON.stringify({
+            'type':'message',
+            'message': input_message.val(),
+        }));
+        input_message.val("");
+    });
+
+    setInterval(function () {
+      ChatSocket.send(JSON.stringify({'type': 'heartbeat'}))
+    }, 100000)
+  </script>
+{% endblock %}

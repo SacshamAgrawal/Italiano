@@ -1,0 +1,336 @@
+{% extends 'pizza/base.html' %}
+{% load mathfilters %}
+{% load static %}
+{% block title %}-Menu{% endblock %}
+{% block body %}
+
+    <link href=" {% static 'pizza/css/scroll.css' %} " rel="stylesheet">    
+
+    <section class="home-slider owl-carousel img" style="background-image: url(/static/pizza/images/bg_1.jpg);">
+
+      <div class="slider-item" style="background-image: url(/static/pizza/images/bg_3.jpg);">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center">
+
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+            	<h1 class="mb-3 mt-5 bread">Our Menu</h1>
+	            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'homepage' %}">Home</a></span> <span>Menu</span></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    
+	<section id="view_menu" class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
+				<div class="col-md-7 heading-section text-center ftco-animate">
+					<h1 class="mb-4">Our Menu Pricing</h1>
+					<p class="flip"><span class="deg1"></span><span class="deg2"></span><span class="deg3"></span></p>
+					<p class="mt-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+				</div>
+			</div>
+			
+			<h2 class ="text-center p-5" >PIZZAS</h2>		
+			<div class="row">
+				<div class="col-md-6">
+					{% for piz in pizza_items %}
+						{% if forloop.counter <= count.pizza|add:1|intdiv:2 %}
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/media/{{piz.image}});"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>{{piz.name}}</span></h3>
+									<span class="price">${{piz.price}}</span>
+								</div>
+								<div class="d-block">
+									<p>{{piz.description}}</p>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+				<div class="col-md-6">
+					{% for piz in pizza_items %}
+						{% if forloop.counter > count.pizza|add:1|intdiv:2 %}
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/media/{{piz.image}});"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>{{piz.name}}</span></h3>
+									<span class="price">${{piz.price}}</span>
+								</div>
+								<div class="d-block">
+									<p>{{piz.description}}</p>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+					{% endfor %}
+				</div>	
+			</div>
+			<h2 class ="text-center p-5" >DRINKS</h2>		
+			<div class="row">
+				<div class="col-md-6">
+					{% for drink in drinks_items %}
+						{% if forloop.counter <= count.drinks|add:1|intdiv:2 %}
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/media/{{drink.image}});"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>{{drink.name}}</span></h3>
+									<span class="price">${{drink.price}}</span>
+								</div>
+								<div class="d-block">
+									<p>{{drink.description}}</p>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+
+				<div class="col-md-6">
+					{% for drink in drinks_items %}
+						{% if forloop.counter > count.drinks|add:1|intdiv:2 %}
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/media/{{drink.image}});"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>{{drink.name}}</span></h3>
+									<span class="price">${{drink.price}}</span>
+								</div>
+								<div class="d-block">
+									<p>{{drink.description}}</p>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+					{% endfor %}
+				</div>	
+			</div>
+			<h2 class ="text-center p-5" >PASTA</h2>		
+			<div class="row">
+				<div class="col-md-6">
+					{% for pasta in pasta_items %}
+						{% if forloop.counter <= count.pasta|add:1|intdiv:2 %}
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/media/{{pasta.image}});"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>{{pasta.name}}</span></h3>
+									<span class="price">${{pasta.price}}</span>
+								</div>
+								<div class="d-block">
+									<p>{{pasta.description}}</p>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+
+				<div class="col-md-6">
+					{% for pasta in pasta_items %}
+						{% if forloop.counter > count.pasta|add:1|intdiv:2 %}
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/media/{{pasta.image}});"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>{{pasta.name}}</span></h3>
+									<span class="price">${{pasta.price}}</span>
+								</div>
+								<div class="d-block">
+									<p>{{pasta.description}}</p>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+					{% endfor %}
+				</div>	
+			</div>
+			<h2 class ="text-center p-5" >BURGERS</h2>		
+			<div class="row">
+				<div class="col-md-6">
+					{% for burger in burger_items %}
+						{% if forloop.counter <= count.burger|add:1|intdiv:2 %}
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/media/{{burger.image}});"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>{{burger.name}}</span></h3>
+									<span class="price">${{burger.price}}</span>
+								</div>
+								<div class="d-block">
+									<p>{{burger.description}}</p>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+
+				<div class="col-md-6">
+					{% for burger in burger_items %}
+						{% if forloop.counter > count.burger|add:1|intdiv:2 %}
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/media/{{burger.image}});"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>{{burger.name}}</span></h3>
+									<span class="price">${{burger.price}}</span>
+								</div>
+								<div class="d-block">
+									<p>{{burger.description}}</p>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+					{% endfor %}
+				</div>	
+			</div>
+    </section>
+    
+    <section id="order_now" class="ftco-menu">
+    	<div class="container-fluid">
+    		<div class="row d-md-flex">
+	    		<div class="col-lg-4 ftco-animate img f-menu-img mb-5 mb-md-0" style="background-image: url(/static/pizza/images/about.jpg);">
+	    		</div>
+	    		<div class="col-lg-8 ftco-animate p-md-5">
+		    		<div class="row">
+                        <div class="col-md-12 nav-link-wrap mb-5">
+                            <div class="nav ftco-animate nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active " id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Pizza</a>
+
+                            <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Drinks</a>
+
+                            <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Burgers</a>
+
+                            <a class="nav-link" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="false">Pasta</a>
+                        </div>
+                        </div>
+                        <div class="col-md-12 d-flex align-items-center">
+                            <div class="tab-content ftco-animate" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab">
+                                    <div id="arrow_2" class="arrow-wrapper">
+                                        {% with range="0:3" %}
+                                        <div class="arrow arrow--left" >
+                                          <span>Prev</span>
+                                        </div>
+                                        <div class="row" id="menu-list" >
+                                            {% for pizza in pizza_items|slice:range %}
+                                            <div class="col-md-4 text-center">
+                                                <div class="menu-wrap">
+                                                    <div class="menu-img img mb-4" style="background-image: url(/media/{{pizza.image}});"></div>
+                                                    <div class="text">
+                                                        <h3><a href="#">{{pizza.name}}</a></h3>
+                                                        <p>{{pizza.description}} - Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+                                                        <p class="price"><span>${{pizza.price}}</span></p>
+                                                        <p><a onclick="add_to_cart('{{pizza.id}}')"  class="btn btn-white btn-outline-white">Add to Cart</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="arrow arrow--right" onclick=scroll_right() >
+                                            <span>Next</span>
+                                        </div>
+                                        {% endwith %}                         
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
+                                    <div id="arrow_2" class="arrow-wrapper">
+                                        <div class="arrow arrow--left">
+                                            <span>Prev</span>
+                                        </div>
+                                        <div class="row">
+                                            {% with range="0:3" %}
+                                            {% for drink in drinks_items|slice:range %}
+                                            <div class="col-md-4 text-center">
+                                                <div class="menu-wrap">
+                                                    <a href="#" class="menu-img img mb-4" style="background-image: url(/media/{{drink.image}});"></a>
+                                                    <div class="text">
+                                                        <h3><a href="#">{{drink.name}}</a></h3>
+                                                        <p>{{drink.description}} - Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+                                                        <p class="price"><span>${{drink.price}}</span></p>
+                                                        <p><a onclick="add_to_cart('{{drink.id}}')" class="btn btn-white btn-outline-white">Add to Cart</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            {% endwith %}                         
+                                        </div>
+                                        <div class="arrow arrow--right">
+                                            <span>Next</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
+                                    <div id="arrow_2" class="arrow-wrapper">
+                                        <div class="arrow arrow--left">
+                                            <span>Prev</span>
+                                        </div>
+                                        <div class="row">
+                                            {% with range="0:3" %}
+                                            {% for burger in burger_items|slice:range %}
+                                            <div class="col-md-4 text-center">
+                                                <div class="menu-wrap">
+                                                    <a href="#" class="menu-img img mb-4" style="background-image: url(/media/{{burger.image}});"></a>
+                                                    <div class="text">
+                                                        <h3><a href="#">{{burger.name}}</a></h3>
+                                                        <p>{{burger.description}} - Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+                                                        <p class="price"><span>${{burger.price}}</span></p>
+                                                        <p><a onclick="add_to_cart('{{burger.id}}')" class="btn btn-white btn-outline-white">Add to Cart</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            {% endwith %}                         
+                                        </div>
+                                        <div class="arrow arrow--right">
+                                            <span>Next</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab">
+                                    <div id="arrow_2" class="arrow-wrapper">
+                                        <div class="arrow arrow--left">
+                                            <span>Prev</span>
+                                        </div>
+                                        <div class="row">
+                                            {% with range="0:3" %}
+                                            {% for pasta in pasta_items|slice:range %}
+                                            <div class="col-md-4 text-center">
+                                                <div class="menu-wrap">
+                                                    <a href="#" class="menu-img img mb-4" style="background-image: url(/media/{{pasta.image}});"></a>
+                                                    <div class="text">
+                                                        <h3><a href="#">{{pasta.name}}</a></h3>
+                                                        <p>{{pasta.description}} - Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+                                                        <p class="price"><span>${{pasta.price}}</span></p>
+                                                        <p><a onclick="add_to_cart('{{pasta.id}}')" class="btn btn-white btn-outline-white">Add to Cart</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            {% endwith %}                         
+                                        </div>
+                                        <div class="arrow arrow--right">
+                                            <span>Next</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+		            </div>
+		        </div>
+		    </div>
+    	</div>
+	</section>
+	
+{% endblock %}

@@ -1,0 +1,22 @@
+<html>
+   <head>
+      <title>CheckOut Page</title>
+   </head>
+   <body>
+      <div style="text-align: center;">
+         <h1>Please do not refresh this page...</h1>
+      </div>
+      <form method="post" action="https://securegw-stage.paytm.in/order/process" name="paytm">
+         <table style="border: 1;">
+            <tbody>
+            {% for key,value in paytmParams.items %}
+                <input type="hidden" name="{{ key }}" value="{{ value }}">                
+            {% endfor %}
+            </tbody>            
+         </table>
+         <script type="text/javascript">
+            document.paytm.submit();
+         </script>
+      </form>
+   </body>
+</html>
